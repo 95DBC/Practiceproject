@@ -67,7 +67,6 @@ public class MainActivity extends AppCompatActivity implements ShowRegisterInfo 
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_commit:
-
                 registerIml = new RegisterIml(this);
                 registerIml.addUser(mContext, Long.parseLong(edtUserID.getText().toString())
                         , edtUserAccount.getText().toString(), edtUserPassword.getText().toString());
