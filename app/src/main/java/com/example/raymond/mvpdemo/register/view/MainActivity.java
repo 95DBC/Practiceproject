@@ -14,6 +14,7 @@ import com.example.raymond.mvpdemo.delete.view.DeleteAty;
 import com.example.raymond.mvpdemo.login.view.LoginAty;
 import com.example.raymond.mvpdemo.register.presenter.RegisterableIml;
 import com.example.raymond.mvpdemo.update.presenter.UpdateInfoable;
+import com.example.raymond.mvpdemo.update.view.UpdateInfoAty;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements ShowRegisterInfo 
                 startActivity(intent1);
                 break;
             case R.id.btn_update:
-                Intent intent2 = new Intent(this, UpdateInfoable.class);
+                Intent intent2 = new Intent(this, UpdateInfoAty.class);
                 startActivity(intent2);
                 break;
             default:

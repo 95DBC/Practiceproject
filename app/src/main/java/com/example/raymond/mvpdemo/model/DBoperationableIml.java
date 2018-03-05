@@ -64,7 +64,7 @@ public class DBoperationableIml implements DBoperationable {
     public void updateData(Context context, long id,String name, String password) {
         openDB(context);
         UserInfo userInfo = new UserInfo(id,name,password);
-        mUserInfoDao.save(userInfo);
+        mUserInfoDao.insertOrReplace(userInfo);
     }
 
 
