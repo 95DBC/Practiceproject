@@ -26,7 +26,8 @@
         </activity>
         <activity android:name=".login.view.LoginAty" />
         <activity android:name=".update.view.UpdateInfoAty" />
-        <activity android:name=".delete.view.DeleteAty"></activity>
+        <activity android:name=".delete.view.DeleteAty" />
+        <activity android:name=".query.view.QueryAty"></activity>
     </application>
 
 </manifest>

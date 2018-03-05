@@ -89,6 +89,7 @@ public class MyApplication extends Application {
      */
     public Session getSession() {
         if (mSession == null) {
+//          存放在SharePrefence 中的Seeion 是String 类型的
             String sessionJsonStr = (String) SharePrefenceHelper.get(this, "Session", "");
             Gson gson = new Gson();
             mSession = gson.fromJson(sessionJsonStr, Session.class);
@@ -102,6 +103,7 @@ public class MyApplication extends Application {
      */
     public void setSession(Session session) {
         this.mSession = session;
+//        由于SharePrefence 不能存放Object 对象（不能存放JAVA Bean 对象），所以需要将其转换为String 类型
         Gson gson = new Gson();
         String sessionJsonStr = gson.toJson(session);
         SharePrefenceHelper.put(this, "Session", sessionJsonStr);
