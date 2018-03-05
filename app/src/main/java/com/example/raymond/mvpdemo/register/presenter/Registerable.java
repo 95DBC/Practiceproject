@@ -8,8 +8,8 @@ import android.content.Context;
  * Description:
  */
 
-public interface Register {
-//    提交用户结果
-    void CommitUserInfoResult(Context context);
+public interface Registerable {
+//    添加用户
+    void addUser(Context context, long id, String name, String password);
 
 }

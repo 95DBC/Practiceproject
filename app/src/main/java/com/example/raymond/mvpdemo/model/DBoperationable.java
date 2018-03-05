@@ -8,7 +8,7 @@ import android.content.Context;
  * Description:
  */
 
-public interface DBoperation {
+public interface DBoperationable {
 //    打开数据库
     void openDB(Context context);
 
@@ -17,5 +17,11 @@ public interface DBoperation {
 
 //    查询数据
     void queryData(Context context);
+
+//    删除数据
+    void deleteData(Context context,long id);
+
+//    修改数据
+    void updateData(Context context,long id,String name,String password);
 
 }

@@ -6,6 +6,8 @@ import android.util.Log;
 import com.com.raymond.downloader.greendao.DaoMaster;
 import com.com.raymond.downloader.greendao.DaoSession;
 import com.com.raymond.downloader.greendao.UserInfoDao;
+import com.example.raymond.mvpdemo.base.MyApplication;
+import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -15,7 +17,7 @@ import java.util.List;
  * Description:
  */
 
-public class DBoperationIml implements DBoperation {
+public class DBoperationableIml implements DBoperationable {
     private DaoMaster.DevOpenHelper mDevOpenHelper;
     private DaoMaster mDaoMaster;
     private DaoSession mDaoSession;
@@ -40,8 +42,30 @@ public class DBoperationIml implements DBoperation {
     public void queryData(Context context) {
         openDB(context);
         List<UserInfo> userInfoList = mUserInfoDao.queryBuilder().list();
-        Log.e("第一数据为",""+userInfoList.get(0).getUserAccount());
+        String userAccount =  userInfoList.get(0).getUserAccount();
+        long userID = userInfoList.get(0).getId();
+
+        /*创建临时对话，用于存放在线用户*/
+        Session session = new Session(userAccount,userID);
+        MyApplication.appSingleInstance().setSession(session);
+
+        Log.e("测试",""+ session.getmUserAccount());
 
     }
+
+    @Override
+    public void deleteData(Context context, long id) {
+        openDB(context);
+        mUserInfoDao.deleteByKey(id);
+
+    }
+
+    @Override
+    public void updateData(Context context, long id,String name, String password) {
+        openDB(context);
+        UserInfo userInfo = new UserInfo(id,name,password);
+        mUserInfoDao.save(userInfo);
+    }
+
 
 }
