@@ -9,7 +9,7 @@ import com.example.raymond.mvpdemo.model.DBoperationableIml;
 /**
  * Created by Raymond 陈徐锋 on 2018/3/5.
  * Email: raymond@hinteen.com
- * Description:
+ * Description: Delete 实现类
  */
 
 public class DeleteIml implements Deleteable {

@@ -9,7 +9,7 @@ import com.example.raymond.mvpdemo.register.view.ShowRegisterInfo;
 /**
  * Created by Raymond 陈徐锋 on 2018/2/26.
  * Email: raymond@hinteen.com
- * Description:
+ * Description: 注册实现类
  */
 
 public class RegisterableIml implements Registerable {

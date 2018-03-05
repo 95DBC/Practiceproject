@@ -7,7 +7,7 @@ import org.greenrobot.greendao.annotation.Generated;
 /**
  * Created by Raymond 陈徐锋 on 2018/2/26.
  * Email: raymond@hinteen.com
- * Description:
+ * Description: DAO 层映射model 类
  */
 @Entity
 public class UserInfo {

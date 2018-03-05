@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by Raymond 陈徐锋 on 2018/2/26.
  * Email: raymond@hinteen.com
- * Description:
+ * Description: Dao 层数数据库操作实现类
  */
 
 public class DBoperationableIml implements DBoperationable {
@@ -23,6 +23,10 @@ public class DBoperationableIml implements DBoperationable {
     private DaoSession mDaoSession;
     private UserInfoDao mUserInfoDao;
 
+    /**
+     * @param context
+     * 打开数据库
+     */
     @Override
     public void openDB(Context context) {
         mDevOpenHelper = new DaoMaster.DevOpenHelper(context,"user.db",null);
@@ -31,6 +35,13 @@ public class DBoperationableIml implements DBoperationable {
         mUserInfoDao = mDaoSession.getUserInfoDao();
     }
 
+    /**
+     * @param context
+     * @param id
+     * @param name
+     * @param password
+     * 插入数据
+     */
     @Override
     public void insertData(Context context,long id,String name,String password) {
         openDB(context);
@@ -38,6 +49,10 @@ public class DBoperationableIml implements DBoperationable {
         mUserInfoDao.insert(userinfo);
     }
 
+    /**
+     * @param context
+     * 查询用户
+     */
     @Override
     public void queryData(Context context) {
         openDB(context);
@@ -53,6 +68,11 @@ public class DBoperationableIml implements DBoperationable {
 
     }
 
+    /**
+     * @param context
+     * @param id
+     * 删除数据
+     */
     @Override
     public void deleteData(Context context, long id) {
         openDB(context);
@@ -60,6 +80,13 @@ public class DBoperationableIml implements DBoperationable {
 
     }
 
+    /**
+     * @param context
+     * @param id
+     * @param name
+     * @param password
+     * 更新用户数据
+     */
     @Override
     public void updateData(Context context, long id,String name, String password) {
         openDB(context);
