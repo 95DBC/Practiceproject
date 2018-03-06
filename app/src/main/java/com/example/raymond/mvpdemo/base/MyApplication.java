@@ -5,13 +5,17 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.example.raymond.mvpdemo.model.Session;
+import com.example.raymond.mvpdemo.model.UserInfo;
 import com.example.raymond.mvpdemo.utils.SharePrefenceHelper;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.tencent.bugly.crashreport.CrashReport;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Raymond 陈徐锋 on 2018/3/2.
@@ -24,6 +28,9 @@ public class MyApplication extends Application {
     private static MyApplication sApp;
     private Session mSession;
     private boolean isDebug = true;
+
+    private UserInfo mUserInfo;
+    private List<UserInfo> mUserInfoList = new ArrayList<UserInfo>();
 
     @Override
     public void onCreate() {
@@ -98,7 +105,7 @@ public class MyApplication extends Application {
     }
 
     /**
-     * 需要传入
+     * 创建临时对话
      * @param session
      */
     public void setSession(Session session) {
@@ -108,5 +115,33 @@ public class MyApplication extends Application {
         String sessionJsonStr = gson.toJson(session);
         SharePrefenceHelper.put(this, "Session", sessionJsonStr);
     }
+
+    /**
+     * @return 返回一个用户列表
+     */
+    public List getUserInfoList(){
+        if (mUserInfoList== null){
+            String userInfoListJsonstr = (String) SharePrefenceHelper.get(this,"UserList","");
+            Gson gson = new Gson();
+            mUserInfoList = gson.fromJson(userInfoListJsonstr,new TypeToken<List<UserInfo>>(){}
+            .getType());
+        }
+        return mUserInfoList;
+    }
+
+    /**
+     * @param userInfoList
+     * 需要注意的是，在对应的View 里头，在其生命周期中的OnDestory() 方法中需要调用SharePrefence中的
+     * remove 方法，删除对应key 值的数据，以免浪费内存
+     */
+    public void setUserInfoList(List<UserInfo> userInfoList){
+        this.mUserInfoList= userInfoList;
+        Gson gson = new Gson();
+        String userInfoListJsonstr = gson.toJson(mUserInfoList);
+        SharePrefenceHelper.put(this,"UserList",userInfoListJsonstr);
+
+    }
+
+
 
 }
