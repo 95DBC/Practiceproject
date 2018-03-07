@@ -101,7 +101,7 @@ public class DBoperationableIml implements DBoperationable {
     @Override
     public void queryAll() {
         List<UserInfo> userInfoList = mUserInfoDao.queryBuilder().list();
-
+        MyApplication.appSingleInstance().setUserInfoList(userInfoList);
     }
 
     /**

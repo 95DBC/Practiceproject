@@ -12,8 +12,8 @@ import android.widget.EditText;
 import com.example.raymond.mvpdemo.R;
 import com.example.raymond.mvpdemo.delete.view.DeleteAty;
 import com.example.raymond.mvpdemo.login.view.LoginAty;
+import com.example.raymond.mvpdemo.query.view.QueryAty;
 import com.example.raymond.mvpdemo.register.presenter.RegisterableIml;
-import com.example.raymond.mvpdemo.update.presenter.UpdateInfoable;
 import com.example.raymond.mvpdemo.update.view.UpdateInfoAty;
 
 import butterknife.BindView;
@@ -36,6 +36,9 @@ public class MainActivity extends AppCompatActivity implements ShowRegisterInfo 
     Button btnDelete;
     @BindView(R.id.btn_update)
     Button btnUpdate;
+    @BindView(R.id.btn_query_witch_key)
+    Button btnQueryWitchKey;
+
 
     private RegisterableIml registerIml;
     private Context mContext;
@@ -49,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements ShowRegisterInfo 
     }
 
 
-    @OnClick({R.id.btn_commit, R.id.btn_querry,R.id.btn_delete, R.id.btn_update})
+    @OnClick({R.id.btn_commit, R.id.btn_querry, R.id.btn_delete, R.id.btn_update,R.id.btn_query_witch_key})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_commit:
@@ -69,6 +72,9 @@ public class MainActivity extends AppCompatActivity implements ShowRegisterInfo 
                 Intent intent2 = new Intent(this, UpdateInfoAty.class);
                 startActivity(intent2);
                 break;
+            case R.id.btn_query_witch_key:
+                Intent intent3 = new Intent(this, QueryAty.class);
+                startActivity(intent3);
             default:
                 break;
         }
