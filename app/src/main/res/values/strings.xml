@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">MVPDemo</string>
+    <string name="help">帮助</string>
+    <string name="settings">设置</string>
+    <string name="string_help_text">帮助文字</string>
+    <string name="quit">离开</string>
     <string name="get_current_user">获取当前用户</string>
+
 </resources>

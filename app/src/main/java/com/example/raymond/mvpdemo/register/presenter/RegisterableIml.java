@@ -2,8 +2,8 @@ package com.example.raymond.mvpdemo.register.presenter;
 
 import android.content.Context;
 
-import com.example.raymond.mvpdemo.model.DBoperationable;
-import com.example.raymond.mvpdemo.model.DBoperationableIml;
+import com.example.raymond.mvpdemo.model.dao.DBoperationable;
+import com.example.raymond.mvpdemo.model.dao.DBoperationIml;
 import com.example.raymond.mvpdemo.register.view.ShowRegisterInfo;
 
 /**
@@ -18,7 +18,7 @@ public class RegisterableIml implements Registerable {
 
     public RegisterableIml(ShowRegisterInfo showRegisterInfo) {
         this.showRegisterInfo = showRegisterInfo;
-        DBoperationable = new DBoperationableIml();
+        DBoperationable = new DBoperationIml();
     }
 
     @Override

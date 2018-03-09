@@ -1,4 +1,4 @@
-package com.example.raymond.mvpdemo.model;
+package com.example.raymond.mvpdemo.model.bean;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;

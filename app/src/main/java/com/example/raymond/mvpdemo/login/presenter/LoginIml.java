@@ -3,8 +3,8 @@ package com.example.raymond.mvpdemo.login.presenter;
 import android.content.Context;
 
 import com.example.raymond.mvpdemo.login.view.ShowLoginInfo;
-import com.example.raymond.mvpdemo.model.DBoperationable;
-import com.example.raymond.mvpdemo.model.DBoperationableIml;
+import com.example.raymond.mvpdemo.model.dao.DBoperationable;
+import com.example.raymond.mvpdemo.model.dao.DBoperationIml;
 
 /**
  * Created by Raymond 陈徐锋 on 2018/2/28.
@@ -18,7 +18,7 @@ public class LoginIml implements Loginable {
 
     public LoginIml(ShowLoginInfo showLoginInfo){
         this.showLoginInfo = showLoginInfo;
-        dBoperationable = new DBoperationableIml();
+        dBoperationable = new DBoperationIml();
     }
 
 

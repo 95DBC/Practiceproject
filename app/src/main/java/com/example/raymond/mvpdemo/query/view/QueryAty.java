@@ -4,16 +4,14 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.raymond.mvpdemo.R;
 import com.example.raymond.mvpdemo.adapter.UserInfoAdapter;
-import com.example.raymond.mvpdemo.model.UserInfo;
+import com.example.raymond.mvpdemo.model.bean.UserInfo;
 import com.example.raymond.mvpdemo.query.presenter.QueryIml;
-import com.example.raymond.mvpdemo.utils.SharePrefenceHelper;
 import com.example.raymond.mvpdemo.widget.SpacesItemDecoration;
 
 import java.util.List;

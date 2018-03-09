@@ -3,8 +3,8 @@ package com.example.raymond.mvpdemo.delete.presenter;
 import android.content.Context;
 
 import com.example.raymond.mvpdemo.delete.view.ShowDeleteInfo;
-import com.example.raymond.mvpdemo.model.DBoperationable;
-import com.example.raymond.mvpdemo.model.DBoperationableIml;
+import com.example.raymond.mvpdemo.model.dao.DBoperationable;
+import com.example.raymond.mvpdemo.model.dao.DBoperationIml;
 
 /**
  * Created by Raymond 陈徐锋 on 2018/3/5.
@@ -18,7 +18,7 @@ public class DeleteIml implements Deleteable {
 
     public DeleteIml(ShowDeleteInfo showDeleteInfo){
         this.showDeleteInfo = showDeleteInfo;
-        dBoperationable = new DBoperationableIml();
+        dBoperationable = new DBoperationIml();
     }
     @Override
     public void delteUser(Context context, long id) {

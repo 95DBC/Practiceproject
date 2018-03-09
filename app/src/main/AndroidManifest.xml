@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:name=".base.MyApplication"
@@ -27,7 +28,9 @@
         <activity android:name=".login.view.LoginAty" />
         <activity android:name=".update.view.UpdateInfoAty" />
         <activity android:name=".delete.view.DeleteAty" />
-        <activity android:name=".query.view.QueryAty"></activity>
+        <activity android:name=".query.view.QueryAty" />
+        <activity android:name=".network.view.NetworkAty" />
+        <activity android:name=".base.PermissionsActivity"></activity>
     </application>
 
 </manifest>

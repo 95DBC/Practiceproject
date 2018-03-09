@@ -1,5 +1,6 @@
 package com.example.raymond.mvpdemo.register.view;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,11 +11,14 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.raymond.mvpdemo.R;
+import com.example.raymond.mvpdemo.base.PermissionsActivity;
 import com.example.raymond.mvpdemo.delete.view.DeleteAty;
 import com.example.raymond.mvpdemo.login.view.LoginAty;
+import com.example.raymond.mvpdemo.network.view.NetworkAty;
 import com.example.raymond.mvpdemo.query.view.QueryAty;
 import com.example.raymond.mvpdemo.register.presenter.RegisterableIml;
 import com.example.raymond.mvpdemo.update.view.UpdateInfoAty;
+import com.example.raymond.mvpdemo.utils.PermissionsChecker;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,10 +42,28 @@ public class MainActivity extends AppCompatActivity implements ShowRegisterInfo 
     Button btnUpdate;
     @BindView(R.id.btn_query_witch_key)
     Button btnQueryWitchKey;
+    @BindView(R.id.btn_network)
+    Button btnNetwork;
 
 
     private RegisterableIml registerIml;
     private Context mContext;
+    private static final int REQUEST_CODE = 0; // 请求码
+
+    // 所需的全部权限
+    static final String[] PERMISSIONS = new String[]{
+            Manifest.permission.RECORD_AUDIO,
+            Manifest.permission.MODIFY_AUDIO_SETTINGS,
+            Manifest.permission.READ_PHONE_STATE,
+            Manifest.permission.READ_LOGS,
+            Manifest.permission.INTERNET,
+            Manifest.permission.ACCESS_NETWORK_STATE,
+            Manifest.permission.ACCESS_WIFI_STATE
+    };
+
+    private PermissionsChecker mPermissionsChecker; // 权限检测器
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +71,34 @@ public class MainActivity extends AppCompatActivity implements ShowRegisterInfo 
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         mContext = this;
+
+        mPermissionsChecker = new PermissionsChecker(this);
+    }
+
+    protected void onResume() {
+        super.onResume();
+
+        // 缺少权限时, 进入权限配置页面
+//        if (mPermissionsChecker.lacksPermissions(PERMISSIONS)) {
+//            startPermissionsActivity();
+//        }
+    }
+
+//    private void startPermissionsActivity() {
+//        PermissionsActivity.startActivityForResult(this, REQUEST_CODE, PERMISSIONS);
+//    }
+
+    @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // 拒绝时, 关闭页面, 缺少主要权限, 无法运行
+        if (requestCode == REQUEST_CODE && resultCode == PermissionsActivity.PERMISSIONS_DENIED) {
+            finish();
+        }
     }
 
 
-    @OnClick({R.id.btn_commit, R.id.btn_querry, R.id.btn_delete, R.id.btn_update,R.id.btn_query_witch_key})
+
+    @OnClick({R.id.btn_commit, R.id.btn_querry, R.id.btn_delete, R.id.btn_update, R.id.btn_query_witch_key,R.id.btn_network})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_commit:
@@ -75,6 +121,9 @@ public class MainActivity extends AppCompatActivity implements ShowRegisterInfo 
             case R.id.btn_query_witch_key:
                 Intent intent3 = new Intent(this, QueryAty.class);
                 startActivity(intent3);
+            case R.id.btn_network:
+                Intent intent4 = new Intent(this, NetworkAty.class);
+                startActivity(intent4);
             default:
                 break;
         }

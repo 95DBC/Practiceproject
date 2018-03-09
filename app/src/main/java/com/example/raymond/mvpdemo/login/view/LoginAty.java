@@ -5,12 +5,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.raymond.mvpdemo.R;
 import com.example.raymond.mvpdemo.base.MyApplication;
 import com.example.raymond.mvpdemo.login.presenter.LoginIml;
-import com.example.raymond.mvpdemo.model.Session;
+import com.example.raymond.mvpdemo.model.bean.Session;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

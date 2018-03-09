@@ -4,8 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.example.raymond.mvpdemo.model.Session;
-import com.example.raymond.mvpdemo.model.UserInfo;
+import com.example.raymond.mvpdemo.model.bean.Session;
+import com.example.raymond.mvpdemo.model.bean.UserInfo;
 import com.example.raymond.mvpdemo.utils.SharePrefenceHelper;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

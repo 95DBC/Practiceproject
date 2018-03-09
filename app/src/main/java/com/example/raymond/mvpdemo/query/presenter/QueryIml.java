@@ -4,9 +4,9 @@ package com.example.raymond.mvpdemo.query.presenter;
 import android.content.Context;
 
 import com.example.raymond.mvpdemo.base.MyApplication;
-import com.example.raymond.mvpdemo.model.DBoperationable;
-import com.example.raymond.mvpdemo.model.DBoperationableIml;
-import com.example.raymond.mvpdemo.model.UserInfo;
+import com.example.raymond.mvpdemo.model.dao.DBoperationable;
+import com.example.raymond.mvpdemo.model.dao.DBoperationIml;
+import com.example.raymond.mvpdemo.model.bean.UserInfo;
 import com.example.raymond.mvpdemo.query.view.ShowQueryInfo;
 
 import java.util.List;
@@ -36,7 +36,7 @@ public class QueryIml implements Queryable {
 
     public QueryIml(ShowQueryInfo showQueryInfo) {
         this.showQueryInfo = showQueryInfo;
-        dBoperationable = new DBoperationableIml();
+        dBoperationable = new DBoperationIml();
     }
 
     @Override

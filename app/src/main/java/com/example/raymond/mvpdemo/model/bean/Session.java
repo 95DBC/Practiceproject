@@ -1,4 +1,4 @@
-package com.example.raymond.mvpdemo.model;
+package com.example.raymond.mvpdemo.model.bean;
 
 import java.io.Serializable;
 

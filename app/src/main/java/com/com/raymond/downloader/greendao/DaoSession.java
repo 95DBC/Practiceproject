@@ -8,7 +8,7 @@ import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.identityscope.IdentityScopeType;
 import org.greenrobot.greendao.internal.DaoConfig;
 
-import com.example.raymond.mvpdemo.model.UserInfo;
+import com.example.raymond.mvpdemo.model.bean.UserInfo;
 
 import com.com.raymond.downloader.greendao.UserInfoDao;
 

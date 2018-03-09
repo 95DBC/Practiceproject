@@ -1,6 +1,6 @@
 package com.example.raymond.mvpdemo.query.view;
 
-import com.example.raymond.mvpdemo.model.UserInfo;
+import com.example.raymond.mvpdemo.model.bean.UserInfo;
 
 import java.util.List;
 

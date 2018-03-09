@@ -1,4 +1,4 @@
-package com.example.raymond.mvpdemo.model;
+package com.example.raymond.mvpdemo.model.dao;
 
 import android.content.Context;
 import android.util.Log;
@@ -7,7 +7,8 @@ import com.com.raymond.downloader.greendao.DaoMaster;
 import com.com.raymond.downloader.greendao.DaoSession;
 import com.com.raymond.downloader.greendao.UserInfoDao;
 import com.example.raymond.mvpdemo.base.MyApplication;
-import com.google.gson.Gson;
+import com.example.raymond.mvpdemo.model.bean.Session;
+import com.example.raymond.mvpdemo.model.bean.UserInfo;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ import java.util.List;
  * 这里除了前五个方法会以实例呈现，其他条件查询不铺开
  */
 
-public class DBoperationableIml implements DBoperationable {
+public class DBoperationIml implements DBoperationable {
     private DaoMaster.DevOpenHelper mDevOpenHelper;
     private DaoMaster mDaoMaster;
     private DaoSession mDaoSession;

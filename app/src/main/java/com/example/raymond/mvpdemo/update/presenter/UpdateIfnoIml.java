@@ -2,8 +2,8 @@ package com.example.raymond.mvpdemo.update.presenter;
 
 import android.content.Context;
 
-import com.example.raymond.mvpdemo.model.DBoperationable;
-import com.example.raymond.mvpdemo.model.DBoperationableIml;
+import com.example.raymond.mvpdemo.model.dao.DBoperationable;
+import com.example.raymond.mvpdemo.model.dao.DBoperationIml;
 import com.example.raymond.mvpdemo.update.view.ShowUpdateInfoable;
 
 /**
@@ -19,7 +19,7 @@ public class UpdateIfnoIml implements UpdateInfoable{
 
     public UpdateIfnoIml(ShowUpdateInfoable showUpdateInfoable){
         this.showUpdateInfoable = showUpdateInfoable;
-        dboperationable = new DBoperationableIml();
+        dboperationable = new DBoperationIml();
     }
 
     @Override

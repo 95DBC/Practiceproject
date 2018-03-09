@@ -1,4 +1,4 @@
-package com.example.raymond.mvpdemo.model;
+package com.example.raymond.mvpdemo.model.dao;
 
 import android.content.Context;
 
