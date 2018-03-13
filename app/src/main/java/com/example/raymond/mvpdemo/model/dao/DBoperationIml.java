@@ -6,11 +6,14 @@ import android.util.Log;
 import com.com.raymond.downloader.greendao.DaoMaster;
 import com.com.raymond.downloader.greendao.DaoSession;
 import com.com.raymond.downloader.greendao.LabelDao;
+import com.com.raymond.downloader.greendao.UserIconDao;
 import com.com.raymond.downloader.greendao.UserInfoDao;
 import com.example.raymond.mvpdemo.base.MyApplication;
 import com.example.raymond.mvpdemo.model.bean.Label;
 import com.example.raymond.mvpdemo.model.bean.Session;
+import com.example.raymond.mvpdemo.model.bean.UserIcon;
 import com.example.raymond.mvpdemo.model.bean.UserInfo;
+import com.example.raymond.mvpdemo.utils.MySQLiteOpenHelper;
 import com.example.raymond.mvpdemo.utils.SharePrefenceHelper;
 import com.google.gson.Gson;
 
@@ -24,22 +27,26 @@ import java.util.List;
  */
 
 public class DBoperationIml implements DBoperationable {
-    private DaoMaster.DevOpenHelper mDevOpenHelper;
+//    private DaoMaster.DevOpenHelper mDevOpenHelper;
+    private MySQLiteOpenHelper mMySQLiteOpenHelper;
     private DaoMaster mDaoMaster;
     private DaoSession mDaoSession;
     private UserInfoDao mUserInfoDao;
     private LabelDao mLabelDao;
+    private UserIconDao mUserIconDao;
 
     /**
-     * @param context 打开数据库
+     * @param context 初始化并打开数据库
      */
     @Override
     public void openDB(Context context) {
-        mDevOpenHelper = new DaoMaster.DevOpenHelper(context, "user.db", null);
-        mDaoMaster = new DaoMaster(mDevOpenHelper.getWritableDb());
+        mMySQLiteOpenHelper = new MySQLiteOpenHelper(context, "user.db",null);
+        mDaoMaster = new DaoMaster(mMySQLiteOpenHelper.getWritableDb());
         mDaoSession = mDaoMaster.newSession();
         mUserInfoDao = mDaoSession.getUserInfoDao();
         mLabelDao = mDaoSession.getLabelDao();
+        mUserIconDao= mDaoSession.getUserIconDao();
+
     }
 
     /**
@@ -119,6 +126,32 @@ public class DBoperationIml implements DBoperationable {
         Gson gson = new Gson();
         String labelJsonStr = gson.toJson(label);
         SharePrefenceHelper.put(context, "label", labelJsonStr);
+    }
+
+    /**
+     * @param context
+     * @param iconId
+     * 根据ID 查询Icon
+     */
+    @Override
+    public void queryUserIcon(Context context, long iconId) {
+        openDB(context);
+        UserIcon userIcon = mUserIconDao.queryBuilder().where(UserIconDao.Properties.IconID.eq(1)).unique();
+        String  userIconData = userIcon.getUserIcon();
+        SharePrefenceHelper.put(context,"userIcon",userIconData);
+    }
+
+    /**
+     * @param context
+     * @param userIcon
+     * 插入用户头像
+     */
+
+    @Override
+    public void insertUserIcon(Context context, String userIcon) {
+        openDB(context);
+        UserIcon userIcon1 = new UserIcon(null,userIcon);
+        mUserIconDao.save(userIcon1);
     }
 
 

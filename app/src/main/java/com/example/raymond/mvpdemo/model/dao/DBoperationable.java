@@ -54,6 +54,22 @@ public interface DBoperationable {
 
 
     /**
+     * @param context
+     * @param iconId
+     * 根据ID查询UserIcon
+     */
+    void queryUserIcon(Context context,long iconId);
+
+
+    /**
+     * @param context
+     * @param userIcon
+     * 插入UserIcon
+     */
+    void insertUserIcon(Context context,String userIcon);
+
+
+    /**
      * 下面的内容为 GreenDAO 的各类条件查询
      */
 
