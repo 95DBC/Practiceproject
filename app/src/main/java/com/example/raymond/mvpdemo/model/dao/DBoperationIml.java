@@ -5,10 +5,14 @@ import android.util.Log;
 
 import com.com.raymond.downloader.greendao.DaoMaster;
 import com.com.raymond.downloader.greendao.DaoSession;
+import com.com.raymond.downloader.greendao.LabelDao;
 import com.com.raymond.downloader.greendao.UserInfoDao;
 import com.example.raymond.mvpdemo.base.MyApplication;
+import com.example.raymond.mvpdemo.model.bean.Label;
 import com.example.raymond.mvpdemo.model.bean.Session;
 import com.example.raymond.mvpdemo.model.bean.UserInfo;
+import com.example.raymond.mvpdemo.utils.SharePrefenceHelper;
+import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -24,56 +28,54 @@ public class DBoperationIml implements DBoperationable {
     private DaoMaster mDaoMaster;
     private DaoSession mDaoSession;
     private UserInfoDao mUserInfoDao;
+    private LabelDao mLabelDao;
 
     /**
-     * @param context
-     * 打开数据库
+     * @param context 打开数据库
      */
     @Override
     public void openDB(Context context) {
-        mDevOpenHelper = new DaoMaster.DevOpenHelper(context,"user.db",null);
+        mDevOpenHelper = new DaoMaster.DevOpenHelper(context, "user.db", null);
         mDaoMaster = new DaoMaster(mDevOpenHelper.getWritableDb());
         mDaoSession = mDaoMaster.newSession();
         mUserInfoDao = mDaoSession.getUserInfoDao();
+        mLabelDao = mDaoSession.getLabelDao();
     }
 
     /**
      * @param context
      * @param id
      * @param name
-     * @param password
-     * 插入数据
+     * @param password 插入数据
      */
     @Override
-    public void insertData(Context context,long id,String name,String password) {
+    public void insertData(Context context, long id, String name, String password) {
         openDB(context);
-        UserInfo userinfo = new UserInfo(id,name,password);
+        UserInfo userinfo = new UserInfo(id, name, password);
         mUserInfoDao.insert(userinfo);
     }
 
     /**
-     * @param context
-     * 查询用户
+     * @param context 查询用户
      */
     @Override
     public void queryData(Context context) {
         openDB(context);
         List<UserInfo> userInfoList = mUserInfoDao.queryBuilder().list();
-        String userAccount =  userInfoList.get(0).getUserAccount();
+        String userAccount = userInfoList.get(0).getUserAccount();
         long userID = userInfoList.get(0).getId();
 
         /*创建临时对话，用于存放在线用户*/
-        Session session = new Session(userAccount,userID);
+        Session session = new Session(userAccount, userID);
         MyApplication.appSingleInstance().setSession(session);
 
-        Log.e("测试",""+ session.getmUserAccount());
+        Log.e("测试", "" + session.getmUserAccount());
 
     }
 
     /**
      * @param context
-     * @param id
-     * 删除数据
+     * @param id      删除数据
      */
     @Override
     public void deleteData(Context context, long id) {
@@ -86,15 +88,39 @@ public class DBoperationIml implements DBoperationable {
      * @param context
      * @param id
      * @param name
-     * @param password
-     * 更新用户数据
+     * @param password 更新用户数据
      */
     @Override
-    public void updateData(Context context, long id,String name, String password) {
+    public void updateData(Context context, long id, String name, String password) {
         openDB(context);
-        UserInfo userInfo = new UserInfo(id,name,password);
+        UserInfo userInfo = new UserInfo(id, name, password);
         mUserInfoDao.insertOrReplace(userInfo);
     }
+
+    /**
+     * @param context
+     * @param labelName 插入标签
+     */
+    @Override
+    public void insertLabel(Context context, String labelName) {
+        openDB(context);
+        Label label = new Label(null,labelName);
+        mLabelDao.insertOrReplace(label);
+    }
+
+    /**
+     * @param context
+     * @param labelName 获取标签
+     */
+    @Override
+    public void queryLabel(Context context, String labelName) {
+        openDB(context);
+        Label label = mLabelDao.queryBuilder().where(LabelDao.Properties.LabelName.like(labelName)).unique();
+        Gson gson = new Gson();
+        String labelJsonStr = gson.toJson(label);
+        SharePrefenceHelper.put(context, "label", labelJsonStr);
+    }
+
 
     /**
      * 查询所有用户
@@ -108,8 +134,7 @@ public class DBoperationIml implements DBoperationable {
     /**
      * @param context
      * @param id
-     * @param name
-     * eq: 精确查询,查询单一匹配用户
+     * @param name    eq: 精确查询,查询单一匹配用户
      */
     @Override
     public void queryEq(Context context, long id, String name) {
@@ -120,8 +145,7 @@ public class DBoperationIml implements DBoperationable {
     /**
      * @param context
      * @param id
-     * @param name
-     *     notEq: not equal 精确查询
+     * @param name    notEq: not equal 精确查询
      */
     @Override
     public void queryNotEq(Context context, long id, String name) {
@@ -133,35 +157,33 @@ public class DBoperationIml implements DBoperationable {
     /**
      * @param context
      * @param id
-     * @param name
-     *  模糊查询：可以通过通赔符"%" 进行模糊搜索
+     * @param name    模糊查询：可以通过通赔符"%" 进行模糊搜索
      */
     @Override
     public void queryLike(Context context, long id, String name) {
         List<UserInfo> userInfoList = mUserInfoDao.queryBuilder()
-                .where(UserInfoDao.Properties.UserAccount.like(name+"%")).list();
+                .where(UserInfoDao.Properties.UserAccount.like(name + "%")).list();
 
     }
 
     /**
      * @param context
-     * @param sid 开始id
-     * @param eid 结束id
-     * @param name 用户账号
-     * 区间搜索：开始ID 和 结束ID 之间
+     * @param sid     开始id
+     * @param eid     结束id
+     * @param name    用户账号
+     *                区间搜索：开始ID 和 结束ID 之间
      */
     @Override
-    public void queryBetween(Context context, long sid, long eid,String name) {
+    public void queryBetween(Context context, long sid, long eid, String name) {
         List<UserInfo> userInfoList = mUserInfoDao.queryBuilder()
-                .where(UserInfoDao.Properties.Id.between(sid,eid)).list();
+                .where(UserInfoDao.Properties.Id.between(sid, eid)).list();
 
     }
 
     /**
      * @param context
      * @param id
-     * @param name
-     * gt: greater than 半开区间查询，大于输入id
+     * @param name    gt: greater than 半开区间查询，大于输入id
      */
     @Override
     public void queryGt(Context context, long id, String name) {
@@ -172,8 +194,7 @@ public class DBoperationIml implements DBoperationable {
     /**
      * @param context
      * @param id
-     * @param name
-     * ge: greater equal 半封闭区间查询，id 值大于或者等于输入id
+     * @param name    ge: greater equal 半封闭区间查询，id 值大于或者等于输入id
      */
     @Override
     public void queryGe(Context context, long id, String name) {
@@ -185,8 +206,7 @@ public class DBoperationIml implements DBoperationable {
     /**
      * @param context
      * @param id
-     * @param name
-     * lt: less than 半开区间查询，id小于输入id
+     * @param name    lt: less than 半开区间查询，id小于输入id
      */
     @Override
     public void queryLt(Context context, long id, String name) {
@@ -198,8 +218,7 @@ public class DBoperationIml implements DBoperationable {
     /**
      * @param context
      * @param id
-     * @param name
-     * le: less equal 半封闭区间查询，id小于或者等于输入id
+     * @param name    le: less equal 半封闭区间查询，id小于或者等于输入id
      */
     @Override
     public void queryLe(Context context, long id, String name) {
@@ -211,13 +230,12 @@ public class DBoperationIml implements DBoperationable {
     /**
      * @param context
      * @param id
-     * @param name
-     * 增序排列
+     * @param name    增序排列
      */
     @Override
     public void queryLikeAsc(Context context, long id, String name) {
         List<UserInfo> userInfoList = mUserInfoDao.queryBuilder()
-                .where(UserInfoDao.Properties.UserAccount.like(name+"%"))
+                .where(UserInfoDao.Properties.UserAccount.like(name + "%"))
                 .orderAsc(UserInfoDao.Properties.Id).list();
 
     }
@@ -225,13 +243,12 @@ public class DBoperationIml implements DBoperationable {
     /**
      * @param context
      * @param id
-     * @param name
-     * 降序排列
+     * @param name    降序排列
      */
     @Override
     public void queryLikeDesc(Context context, long id, String name) {
         List<UserInfo> userInfoList = mUserInfoDao.queryBuilder()
-                .where(UserInfoDao.Properties.UserAccount.like(name+"%"))
+                .where(UserInfoDao.Properties.UserAccount.like(name + "%"))
                 .orderDesc(UserInfoDao.Properties.Id).list();
 
     }

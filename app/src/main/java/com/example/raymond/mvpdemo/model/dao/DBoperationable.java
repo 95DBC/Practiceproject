@@ -9,8 +9,14 @@ import android.content.Context;
  */
 
 public interface DBoperationable {
+
+
     //    打开数据库
     void openDB(Context context);
+
+    /**
+     * 这一部分为用户信息表操作
+     */
 
     //    插入数据
     void insertData(Context context, long id, String name, String account);
@@ -23,6 +29,29 @@ public interface DBoperationable {
 
     //    修改数据
     void updateData(Context context, long id, String name, String password);
+
+
+    /**
+     * 这一部分为标签
+     */
+
+
+
+    /**
+     * @param context
+     * @param labelName
+     * 添加标签
+     */
+
+    void insertLabel(Context context,String labelName);
+
+    /**
+     * @param context
+     * @param labelName
+     * 根据labelName 来查询 labelName 所对应的id
+     */
+    void queryLabel(Context context,String labelName);
+
 
     /**
      * 下面的内容为 GreenDAO 的各类条件查询
@@ -40,25 +69,25 @@ public interface DBoperationable {
     //   like  模糊查询
     void queryLike(Context context, long id, String name);
 
-    //   between 区间查询 年龄在开始ID到结束ID之间
+    //   区间搜索：开始ID 和 结束ID 之间
     void queryBetween(Context context ,long sid, long eid,String name);
 
-    //    gt: greater than 半开区间查询，年龄大于18
+    //    gt: greater than 半开区间查询，大于输入id
     void queryGt(Context context,long id,String name);
 
-    //    ge:greater equal 半封闭区间查询，年龄大于或者等于18
+    //   ge: greater equal 半封闭区间查询，id 值大于或者等于输入id
     void queryGe(Context context,long id,String name);
 
-    //    lt: less than 半开区间查询，年龄小于18
+    //    lt: less than 半开区间查询，id小于输入id
     void queryLt(Context context,long id,String name);
 
-    //    le: less equal 半封闭区间查询，年龄小于或者等于18
+    //   le: less equal 半封闭区间查询，id小于或者等于输入id
     void queryLe(Context context,long id,String name);
 
-    //    名字以jackie开头，年龄升序排序
+    //    年龄升序排序
     void queryLikeAsc(Context context,long id,String name);
 
-    //    名字以jackie开头，年龄降序排序
+    //    降序排序
     void queryLikeDesc(Context context,long id,String name);
 
 

@@ -13,10 +13,12 @@ import android.widget.EditText;
 import com.example.raymond.mvpdemo.R;
 import com.example.raymond.mvpdemo.base.PermissionsActivity;
 import com.example.raymond.mvpdemo.delete.view.DeleteAty;
+import com.example.raymond.mvpdemo.labelmanager.view.AddLabelAty;
 import com.example.raymond.mvpdemo.login.view.LoginAty;
 import com.example.raymond.mvpdemo.network.view.NetworkAty;
 import com.example.raymond.mvpdemo.query.view.QueryAty;
 import com.example.raymond.mvpdemo.register.presenter.RegisterableIml;
+import com.example.raymond.mvpdemo.tinypng.TinyPngTest;
 import com.example.raymond.mvpdemo.update.view.UpdateInfoAty;
 import com.example.raymond.mvpdemo.utils.PermissionsChecker;
 
@@ -44,6 +46,10 @@ public class MainActivity extends AppCompatActivity implements ShowRegisterInfo 
     Button btnQueryWitchKey;
     @BindView(R.id.btn_network)
     Button btnNetwork;
+    @BindView(R.id.testTinyPng)
+    Button testTinyPng;
+    @BindView(R.id.btn_testGreenDAOID)
+    Button btnTestGreenDAOID;
 
 
     private RegisterableIml registerIml;
@@ -62,7 +68,6 @@ public class MainActivity extends AppCompatActivity implements ShowRegisterInfo 
     };
 
     private PermissionsChecker mPermissionsChecker; // 权限检测器
-
 
 
     @Override
@@ -88,7 +93,8 @@ public class MainActivity extends AppCompatActivity implements ShowRegisterInfo 
 //        PermissionsActivity.startActivityForResult(this, REQUEST_CODE, PERMISSIONS);
 //    }
 
-    @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         // 拒绝时, 关闭页面, 缺少主要权限, 无法运行
         if (requestCode == REQUEST_CODE && resultCode == PermissionsActivity.PERMISSIONS_DENIED) {
@@ -97,8 +103,8 @@ public class MainActivity extends AppCompatActivity implements ShowRegisterInfo 
     }
 
 
-
-    @OnClick({R.id.btn_commit, R.id.btn_querry, R.id.btn_delete, R.id.btn_update, R.id.btn_query_witch_key,R.id.btn_network})
+    @OnClick({R.id.btn_commit, R.id.btn_querry, R.id.btn_delete, R.id.btn_update
+            , R.id.btn_query_witch_key, R.id.btn_network, R.id.testTinyPng,R.id.btn_testGreenDAOID})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_commit:
@@ -121,9 +127,19 @@ public class MainActivity extends AppCompatActivity implements ShowRegisterInfo 
             case R.id.btn_query_witch_key:
                 Intent intent3 = new Intent(this, QueryAty.class);
                 startActivity(intent3);
+                break;
             case R.id.btn_network:
                 Intent intent4 = new Intent(this, NetworkAty.class);
                 startActivity(intent4);
+                break;
+            case R.id.testTinyPng:
+                Intent intent5 = new Intent(this, TinyPngTest.class);
+                startActivity(intent5);
+                break;
+            case R.id.btn_testGreenDAOID:
+                Intent intent6 = new Intent(this, AddLabelAty.class);
+                startActivity(intent6);
+                break;
             default:
                 break;
         }

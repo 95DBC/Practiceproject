@@ -30,7 +30,10 @@
         <activity android:name=".delete.view.DeleteAty" />
         <activity android:name=".query.view.QueryAty" />
         <activity android:name=".network.view.NetworkAty" />
-        <activity android:name=".base.PermissionsActivity"></activity>
+        <activity android:name=".base.PermissionsActivity" />
+        <activity android:name=".tinypng.TinyPngTest" />
+        <activity android:name=".tinypng.TinyPngTest2" />
+        <activity android:name=".labelmanager.view.AddLabelAty"></activity>
     </application>
 
 </manifest>
