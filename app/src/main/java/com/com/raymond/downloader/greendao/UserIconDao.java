@@ -41,7 +41,7 @@ public class UserIconDao extends AbstractDao<UserIcon, Long> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"USER_ICON\" (" + //
-                "\"_id\" INTEGER PRIMARY KEY ," + // 0: IconID
+                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: IconID
                 "\"USER_ICON\" TEXT);"); // 1: UserIcon
     }
 

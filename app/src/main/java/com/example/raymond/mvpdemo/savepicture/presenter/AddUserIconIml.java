@@ -17,26 +17,16 @@ import com.example.raymond.mvpdemo.update.presenter.UpdateInfoable;
 public class AddUserIconIml implements AddUserIconable {
     private DBoperationable mDBoperationable;
     private UserIconable mUserIconable;
-    private QueryIconable mQueryIconable;
 
     public  AddUserIconIml(UserIconable userIconable) {
         this.mUserIconable = userIconable;
         mDBoperationable = new DBoperationIml();
     }
 
-    public AddUserIconIml(QueryIconable queryIconable){
-        this.mQueryIconable = queryIconable;
-        mDBoperationable = new DBoperationIml();
-    }
-
     @Override
     public void addUserIcon(Context context, String userIcon) {
         mDBoperationable.insertUserIcon(context,userIcon);
+        mUserIconable.getUserIconFromImg();
     }
 
-    @Override
-    public void showUserIcon(Context context, long iconId) {
-        mDBoperationable.queryUserIcon(context,iconId);
-
-    }
 }

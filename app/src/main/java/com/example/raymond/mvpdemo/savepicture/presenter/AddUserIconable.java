@@ -12,7 +12,4 @@ public interface AddUserIconable {
 
 //    添加用户头像
     void addUserIcon(Context context,String userIcon);
-
-//    查看用户头像
-    void showUserIcon(Context context,long iconId);
 }

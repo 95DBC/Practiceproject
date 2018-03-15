@@ -18,6 +18,7 @@ import com.example.raymond.mvpdemo.login.view.LoginAty;
 import com.example.raymond.mvpdemo.network.view.NetworkAty;
 import com.example.raymond.mvpdemo.query.view.QueryAty;
 import com.example.raymond.mvpdemo.register.presenter.RegisterableIml;
+import com.example.raymond.mvpdemo.savepicture.view.UserIconAty;
 import com.example.raymond.mvpdemo.tinypng.TinyPngTest;
 import com.example.raymond.mvpdemo.update.view.UpdateInfoAty;
 import com.example.raymond.mvpdemo.utils.PermissionsChecker;
@@ -50,6 +51,8 @@ public class MainActivity extends AppCompatActivity implements ShowRegisterInfo 
     Button testTinyPng;
     @BindView(R.id.btn_testGreenDAOID)
     Button btnTestGreenDAOID;
+    @BindView(R.id.btn_picture)
+    Button btnPicture;
 
 
     private RegisterableIml registerIml;
@@ -104,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements ShowRegisterInfo 
 
 
     @OnClick({R.id.btn_commit, R.id.btn_querry, R.id.btn_delete, R.id.btn_update
-            , R.id.btn_query_witch_key, R.id.btn_network, R.id.testTinyPng,R.id.btn_testGreenDAOID})
+            , R.id.btn_query_witch_key, R.id.btn_network, R.id.testTinyPng,R.id.btn_testGreenDAOID,R.id.btn_picture})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_commit:
@@ -140,6 +143,9 @@ public class MainActivity extends AppCompatActivity implements ShowRegisterInfo 
                 Intent intent6 = new Intent(this, AddLabelAty.class);
                 startActivity(intent6);
                 break;
+            case R.id.btn_picture:
+                Intent intent7 = new Intent(this, UserIconAty.class);
+                startActivity(intent7);
             default:
                 break;
         }

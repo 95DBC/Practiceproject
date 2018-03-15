@@ -35,7 +35,8 @@
         <activity android:name=".tinypng.TinyPngTest2" />
         <activity android:name=".labelmanager.view.AddLabelAty" />
         <activity android:name=".savepicture.view.UserIconAty" />
-        <activity android:name=".savepicture.view.QueryIconAty"></activity>
+        <activity android:name=".savepicture.view.QueryIconAty" />
+        <activity android:name=".userdetail.view.UserDetailAty"></activity>
     </application>
 
 </manifest>

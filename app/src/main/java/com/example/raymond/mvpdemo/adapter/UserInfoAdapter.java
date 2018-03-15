@@ -18,15 +18,18 @@ import java.util.List;
  * 下次可考虑创建个万能的RecyclerAdapter
  */
 
-public class UserInfoAdapter extends RecyclerView.Adapter<UserInfoAdapter.ViewHolder>{
+public class UserInfoAdapter extends RecyclerView.Adapter<UserInfoAdapter.ViewHolder> implements View.OnClickListener {
 
     private List<UserInfo> mUserInfoList;
+    private OnItemClickListener mOnItemClickListener = null;
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_user,parent,false);
+                .inflate(R.layout.item_user, parent, false);
         ViewHolder holder = new ViewHolder(view);
+//        将View创建View 注册点击事件
+        view.setOnClickListener(this);
         return holder;
     }
 
@@ -35,6 +38,25 @@ public class UserInfoAdapter extends RecyclerView.Adapter<UserInfoAdapter.ViewHo
         UserInfo mUser = mUserInfoList.get(position);
         holder.userID.setText(String.valueOf(mUser.getId()));
         holder.userAccount.setText(mUser.getUserAccount());
+//         将position保存在itemView的Tag中，以便点击时进行获取
+        holder.itemView.setTag(position);
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (mOnItemClickListener != null) {
+            mOnItemClickListener.onItemClick(view, (int) view.getTag());
+        }
+    }
+
+
+    /**
+     * @param listener
+     * 暴露给外部调用者，定义一个设置Listener 的方法（）
+     */
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.mOnItemClickListener = listener;
 
     }
 
@@ -43,11 +65,11 @@ public class UserInfoAdapter extends RecyclerView.Adapter<UserInfoAdapter.ViewHo
         return mUserInfoList.size();
     }
 
-    public UserInfoAdapter (List<UserInfo> UserInfoList){
+    public UserInfoAdapter(List<UserInfo> UserInfoList) {
         mUserInfoList = UserInfoList;
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder{
+    static class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView userAccount;
         TextView userID;
@@ -59,4 +81,9 @@ public class UserInfoAdapter extends RecyclerView.Adapter<UserInfoAdapter.ViewHo
 
         }
     }
+
+    public static interface OnItemClickListener {
+        void onItemClick(View view, int position);
+    }
+
 }
