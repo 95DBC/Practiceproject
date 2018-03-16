@@ -8,6 +8,9 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -35,14 +38,33 @@ public class QueryAty extends AppCompatActivity implements ShowQueryInfo {
     FloatingActionButton floatBtnRefresh;
     @BindView(R.id.rlv_user_info)
     RecyclerView rlvUserInfo;
-//    @BindView(R.id.swrLay_refresh)
-//    SwipeRefreshLayout swrLayRefresh;
-    @BindView(R.id.coLay)
-    CoordinatorLayout coLay;
+    @BindView(R.id.tb_toolbar)
+    Toolbar tbToolbar;
+
     private Context mContext;
 
     private QueryIml queryIml;
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.iv_more:
+
+                break;
+            case R.id.iv_share:
+
+                break;
+            default:
+                break;
+        }
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +78,19 @@ public class QueryAty extends AppCompatActivity implements ShowQueryInfo {
 //        自定义RecyclerView 之间Item 的间隔
         int spacingInPixels = 8;
         rlvUserInfo.addItemDecoration(new SpacesItemDecoration(spacingInPixels));
+
+
+        setSupportActionBar(tbToolbar);
+        tbToolbar.setNavigationIcon(R.drawable.ic_back);
+        tbToolbar.setLogo(R.mipmap.ic_launcher);
+        tbToolbar.setTitle("中国人");
+        tbToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
     }
 
 
@@ -87,10 +122,10 @@ public class QueryAty extends AppCompatActivity implements ShowQueryInfo {
                 String mUserAccount = iv_userAccount.getText().toString();
 
                 Bundle bundle = new Bundle();
-                bundle.putString("userid",mUserId);
-                bundle.putString("useraccount",mUserAccount);
+                bundle.putString("userid", mUserId);
+                bundle.putString("useraccount", mUserAccount);
 
-                Intent intent = new Intent(QueryAty.this,UserDetailAty.class);
+                Intent intent = new Intent(QueryAty.this, UserDetailAty.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
 

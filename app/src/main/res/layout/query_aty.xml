@@ -5,9 +5,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.raymond.mvpdemo.query.view.QueryAty">
-    <FrameLayout
+
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/coolLay"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/tb_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:elevation="4dp"
+            android:minHeight="60dp"
+            app:title="你好"
+            app:layout_scrollFlags="scroll|enterAlways"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+            <!--<TextView-->
+                <!--android:id="@+id/tv_userNickname"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="95大白菜"-->
+                <!--/>-->
+
+
+        </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.AppBarLayout>
+
+
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/floatBtn_refresh"
             android:layout_width="50dp"
@@ -17,11 +47,6 @@
             android:background="@drawable/ic_refresh"
             />
 
-    <android.support.design.widget.CoordinatorLayout
-        android:id="@+id/coLay"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
         <!--<android.support.v4.widget.SwipeRefreshLayout-->
             <!--android:id="@+id/swrLay_refresh"-->
             <!--android:layout_width="match_parent"-->
@@ -30,13 +55,15 @@
                 android:id="@+id/rlv_user_info"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 >
 
             </android.support.v7.widget.RecyclerView>
 
+
         <!--</android.support.v4.widget.SwipeRefreshLayout>-->
 
     </android.support.design.widget.CoordinatorLayout>
-    </FrameLayout>
+
 
 </LinearLayout>
