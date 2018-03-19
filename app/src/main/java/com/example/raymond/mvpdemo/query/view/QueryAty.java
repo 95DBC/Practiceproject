@@ -79,6 +79,8 @@ public class QueryAty extends AppCompatActivity implements ShowQueryInfo {
         int spacingInPixels = 8;
         rlvUserInfo.addItemDecoration(new SpacesItemDecoration(spacingInPixels));
 
+        rlvUserInfo.setNestedScrollingEnabled(false);
+
 
         setSupportActionBar(tbToolbar);
         tbToolbar.setNavigationIcon(R.drawable.ic_back);
