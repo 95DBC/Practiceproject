@@ -26,8 +26,8 @@
         android:theme="@style/AppTheme"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:navigationIcon="@drawable/ic_back">
-
     </android.support.v7.widget.Toolbar>
+
     </android.support.design.widget.AppBarLayout>
     </android.support.design.widget.CoordinatorLayout>
 </LinearLayout>
