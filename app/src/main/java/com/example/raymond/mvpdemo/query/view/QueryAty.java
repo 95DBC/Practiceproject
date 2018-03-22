@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +21,7 @@ import com.example.raymond.mvpdemo.adapter.UserInfoAdapter;
 import com.example.raymond.mvpdemo.model.bean.UserInfo;
 import com.example.raymond.mvpdemo.query.presenter.QueryIml;
 import com.example.raymond.mvpdemo.userdetail.view.UserDetailAty;
+import com.example.raymond.mvpdemo.widget.GridSpacingItemDecoration;
 import com.example.raymond.mvpdemo.widget.SpacesItemDecoration;
 
 import java.util.List;
@@ -108,10 +111,14 @@ public class QueryAty extends AppCompatActivity implements ShowQueryInfo {
 
     @Override
     public void showOnRecycleView(List<UserInfo> userInfoList) {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
         rlvUserInfo.setLayoutManager(layoutManager);
         UserInfoAdapter adapter = new UserInfoAdapter(userInfoList);
         rlvUserInfo.setAdapter(adapter);
+
+        rlvUserInfo.setItemAnimator(new DefaultItemAnimator());
+        rlvUserInfo.setHasFixedSize(true);
+        rlvUserInfo.addItemDecoration(new GridSpacingItemDecoration(2,10,true));
 
 //        创建item 点击事件
         adapter.setOnItemClickListener(new UserInfoAdapter.OnItemClickListener() {

@@ -33,16 +33,14 @@
         <activity android:name=".savepicture.view.UserIconAty" />
         <activity android:name=".savepicture.view.QueryIconAty" />
         <activity android:name=".userdetail.view.UserDetailAty" />
-        <activity android:name=".searchbar.SearchVeiwAAty">
+        <activity android:name=".searchbar.SearchVeiwAAty"></activity>
+        <activity android:name=".searchbar.SearchViewBActivity"></activity>
+        <activity android:name=".tablayout.view.TestTablayout">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".searchbar.SearchViewBActivity">
-
-
         </activity>
     </application>
 
