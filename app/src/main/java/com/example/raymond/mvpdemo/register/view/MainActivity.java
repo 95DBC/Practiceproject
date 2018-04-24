@@ -19,6 +19,7 @@ import com.example.raymond.mvpdemo.network.view.NetworkAty;
 import com.example.raymond.mvpdemo.query.view.QueryAty;
 import com.example.raymond.mvpdemo.register.presenter.RegisterableIml;
 import com.example.raymond.mvpdemo.savepicture.view.UserIconAty;
+import com.example.raymond.mvpdemo.talk.view.TalkAct;
 import com.example.raymond.mvpdemo.tinypng.TinyPngTest;
 import com.example.raymond.mvpdemo.update.view.UpdateInfoAty;
 import com.example.raymond.mvpdemo.utils.PermissionsChecker;
@@ -53,6 +54,8 @@ public class MainActivity extends AppCompatActivity implements ShowRegisterInfo 
     Button btnTestGreenDAOID;
     @BindView(R.id.btn_picture)
     Button btnPicture;
+    @BindView(R.id.btn_talk)
+    Button btnTalk;
 
 
     private RegisterableIml registerIml;
@@ -146,6 +149,9 @@ public class MainActivity extends AppCompatActivity implements ShowRegisterInfo 
             case R.id.btn_picture:
                 Intent intent7 = new Intent(this, UserIconAty.class);
                 startActivity(intent7);
+            case R.id.btn_talk:
+                Intent intent8 = new Intent(this, TalkAct.class);
+                startActivity(intent8);
             default:
                 break;
         }

@@ -9,10 +9,12 @@ import org.greenrobot.greendao.identityscope.IdentityScopeType;
 import org.greenrobot.greendao.internal.DaoConfig;
 
 import com.example.raymond.mvpdemo.model.bean.Label;
+import com.example.raymond.mvpdemo.model.bean.TalkContext;
 import com.example.raymond.mvpdemo.model.bean.UserIcon;
 import com.example.raymond.mvpdemo.model.bean.UserInfo;
 
 import com.com.raymond.downloader.greendao.LabelDao;
+import com.com.raymond.downloader.greendao.TalkContextDao;
 import com.com.raymond.downloader.greendao.UserIconDao;
 import com.com.raymond.downloader.greendao.UserInfoDao;
 
@@ -26,10 +28,12 @@ import com.com.raymond.downloader.greendao.UserInfoDao;
 public class DaoSession extends AbstractDaoSession {
 
     private final DaoConfig labelDaoConfig;
+    private final DaoConfig talkContextDaoConfig;
     private final DaoConfig userIconDaoConfig;
     private final DaoConfig userInfoDaoConfig;
 
     private final LabelDao labelDao;
+    private final TalkContextDao talkContextDao;
     private final UserIconDao userIconDao;
     private final UserInfoDao userInfoDao;
 
@@ -40,6 +44,9 @@ public class DaoSession extends AbstractDaoSession {
         labelDaoConfig = daoConfigMap.get(LabelDao.class).clone();
         labelDaoConfig.initIdentityScope(type);
 
+        talkContextDaoConfig = daoConfigMap.get(TalkContextDao.class).clone();
+        talkContextDaoConfig.initIdentityScope(type);
+
         userIconDaoConfig = daoConfigMap.get(UserIconDao.class).clone();
         userIconDaoConfig.initIdentityScope(type);
 
@@ -47,22 +54,29 @@ public class DaoSession extends AbstractDaoSession {
         userInfoDaoConfig.initIdentityScope(type);
 
         labelDao = new LabelDao(labelDaoConfig, this);
+        talkContextDao = new TalkContextDao(talkContextDaoConfig, this);
         userIconDao = new UserIconDao(userIconDaoConfig, this);
         userInfoDao = new UserInfoDao(userInfoDaoConfig, this);
 
         registerDao(Label.class, labelDao);
+        registerDao(TalkContext.class, talkContextDao);
         registerDao(UserIcon.class, userIconDao);
         registerDao(UserInfo.class, userInfoDao);
     }
     
     public void clear() {
         labelDaoConfig.clearIdentityScope();
+        talkContextDaoConfig.clearIdentityScope();
         userIconDaoConfig.clearIdentityScope();
         userInfoDaoConfig.clearIdentityScope();
     }
 
     public LabelDao getLabelDao() {
         return labelDao;
+    }
+
+    public TalkContextDao getTalkContextDao() {
+        return talkContextDao;
     }
 
     public UserIconDao getUserIconDao() {
