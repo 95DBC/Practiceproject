@@ -25,7 +25,9 @@ public class TalkContextDao extends AbstractDao<TalkContext, Long> {
      */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property TalkContext = new Property(1, String.class, "talkContext", false, "TALK_CONTEXT");
+        public final static Property Uid = new Property(1, Long.class, "uid", false, "UID");
+        public final static Property Questionid = new Property(2, Long.class, "questionid", false, "QUESTIONID");
+        public final static Property TalkContext = new Property(3, String.class, "talkContext", false, "TALK_CONTEXT");
     }
 
 
@@ -42,7 +44,9 @@ public class TalkContextDao extends AbstractDao<TalkContext, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"TALK_CONTEXT\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
-                "\"TALK_CONTEXT\" TEXT);"); // 1: talkContext
+                "\"UID\" INTEGER," + // 1: uid
+                "\"QUESTIONID\" INTEGER," + // 2: questionid
+                "\"TALK_CONTEXT\" TEXT);"); // 3: talkContext
     }
 
     /** Drops the underlying database table. */
@@ -60,9 +64,19 @@ public class TalkContextDao extends AbstractDao<TalkContext, Long> {
             stmt.bindLong(1, id);
         }
  
+        Long uid = entity.getUid();
+        if (uid != null) {
+            stmt.bindLong(2, uid);
+        }
+ 
+        Long questionid = entity.getQuestionid();
+        if (questionid != null) {
+            stmt.bindLong(3, questionid);
+        }
+ 
         String talkContext = entity.getTalkContext();
         if (talkContext != null) {
-            stmt.bindString(2, talkContext);
+            stmt.bindString(4, talkContext);
         }
     }
 
@@ -75,9 +89,19 @@ public class TalkContextDao extends AbstractDao<TalkContext, Long> {
             stmt.bindLong(1, id);
         }
  
+        Long uid = entity.getUid();
+        if (uid != null) {
+            stmt.bindLong(2, uid);
+        }
+ 
+        Long questionid = entity.getQuestionid();
+        if (questionid != null) {
+            stmt.bindLong(3, questionid);
+        }
+ 
         String talkContext = entity.getTalkContext();
         if (talkContext != null) {
-            stmt.bindString(2, talkContext);
+            stmt.bindString(4, talkContext);
         }
     }
 
@@ -90,7 +114,9 @@ public class TalkContextDao extends AbstractDao<TalkContext, Long> {
     public TalkContext readEntity(Cursor cursor, int offset) {
         TalkContext entity = new TalkContext( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1) // talkContext
+            cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1), // uid
+            cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2), // questionid
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // talkContext
         );
         return entity;
     }
@@ -98,7 +124,9 @@ public class TalkContextDao extends AbstractDao<TalkContext, Long> {
     @Override
     public void readEntity(Cursor cursor, TalkContext entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setTalkContext(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setUid(cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1));
+        entity.setQuestionid(cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2));
+        entity.setTalkContext(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
      }
     
     @Override

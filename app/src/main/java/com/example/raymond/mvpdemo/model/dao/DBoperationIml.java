@@ -6,11 +6,13 @@ import android.util.Log;
 import com.com.raymond.downloader.greendao.DaoMaster;
 import com.com.raymond.downloader.greendao.DaoSession;
 import com.com.raymond.downloader.greendao.LabelDao;
+import com.com.raymond.downloader.greendao.TalkContextDao;
 import com.com.raymond.downloader.greendao.UserIconDao;
 import com.com.raymond.downloader.greendao.UserInfoDao;
 import com.example.raymond.mvpdemo.base.MyApplication;
 import com.example.raymond.mvpdemo.model.bean.Label;
 import com.example.raymond.mvpdemo.model.bean.Session;
+import com.example.raymond.mvpdemo.model.bean.TalkContext;
 import com.example.raymond.mvpdemo.model.bean.UserIcon;
 import com.example.raymond.mvpdemo.model.bean.UserInfo;
 import com.example.raymond.mvpdemo.utils.MySQLiteOpenHelper;
@@ -34,6 +36,7 @@ public class DBoperationIml implements DBoperationable {
     private UserInfoDao mUserInfoDao;
     private LabelDao mLabelDao;
     private UserIconDao mUserIconDao;
+    private TalkContextDao mTalkContextDao;
 
     /**
      * @param context 初始化并打开数据库
@@ -46,6 +49,7 @@ public class DBoperationIml implements DBoperationable {
         mUserInfoDao = mDaoSession.getUserInfoDao();
         mLabelDao = mDaoSession.getLabelDao();
         mUserIconDao= mDaoSession.getUserIconDao();
+        mTalkContextDao = mDaoSession.getTalkContextDao();
 
     }
 
@@ -162,6 +166,31 @@ public class DBoperationIml implements DBoperationable {
     public void queryAll() {
         List<UserInfo> userInfoList = mUserInfoDao.queryBuilder().list();
         MyApplication.appSingleInstance().setUserInfoList(userInfoList);
+    }
+
+
+    /**
+     * @param context
+     * 查询所有讨论
+     */
+    @Override
+    public void queryAllTalkText(Context context) {
+        openDB(context);
+        List<TalkContext> talkContextList =mTalkContextDao.queryBuilder().list();
+        MyApplication.appSingleInstance().mTalkContextList = talkContextList;
+
+    }
+
+    /**
+     * @param context
+     * @param talkContext
+     * 存储讨论内容
+     */
+    @Override
+    public void insertTalkContext(Context context, Long uid ,Long questionid ,String talkContext) {
+        openDB(context);
+        TalkContext mTalkContext = new TalkContext(null,uid,questionid,talkContext);
+        mTalkContextDao.save(mTalkContext);
     }
 
     /**

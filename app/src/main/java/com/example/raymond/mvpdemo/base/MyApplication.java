@@ -5,6 +5,7 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.example.raymond.mvpdemo.model.bean.Session;
+import com.example.raymond.mvpdemo.model.bean.TalkContext;
 import com.example.raymond.mvpdemo.model.bean.UserInfo;
 import com.example.raymond.mvpdemo.utils.SharePrefenceHelper;
 import com.google.gson.Gson;
@@ -31,6 +32,10 @@ public class MyApplication extends Application {
 
     private UserInfo mUserInfo;
     private List<UserInfo> mUserInfoList = new ArrayList<UserInfo>();
+    public List<TalkContext> mTalkContextList = new ArrayList<>();
+
+//    讨论状态，如果状态为0 的话 则单独插入 ，如果为1 的话，则添加“responer回复asker: TalkContext”
+    public int TalkState = 0;
 
     @Override
     public void onCreate() {

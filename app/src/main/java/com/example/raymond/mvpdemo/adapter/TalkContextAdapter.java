@@ -16,20 +16,27 @@ import java.util.List;
  * Email: raymond@hinteen.com
  * Description:
  */
-public class TalkContextAdapter extends RecyclerView.Adapter<TalkContextAdapter.ViewHolder> {
+public class TalkContextAdapter extends RecyclerView.Adapter<TalkContextAdapter.ViewHolder> implements View.OnClickListener {
+
     private List<TalkContext> mTalkCotextList;
+    private OnItemClickListener mOnItemClickListener = null;
+
+    public static interface OnItemClickListener {
+        void onItemClick(View view, int position);
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view  = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_talk,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_talk, parent, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(TalkContextAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         TalkContext mTalkContext = mTalkCotextList.get(position);
         holder.talkContext.setText(mTalkContext.getTalkContext());
+        holder.itemView.setTag(position);
 
     }
 
@@ -38,11 +45,23 @@ public class TalkContextAdapter extends RecyclerView.Adapter<TalkContextAdapter.
         return mTalkCotextList.size();
     }
 
-    public TalkContextAdapter(List<TalkContext> talkContextList){
+    public TalkContextAdapter(List<TalkContext> talkContextList) {
         mTalkCotextList = talkContextList;
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder{
+    @Override
+    public void onClick(View v) {
+        if (mOnItemClickListener !=null){
+
+            mOnItemClickListener.onItemClick(v,(int)v.getTag());
+        }
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.mOnItemClickListener = listener;
+    }
+
+    static class ViewHolder extends RecyclerView.ViewHolder {
         TextView talkContext;
 
         public ViewHolder(View itemView) {

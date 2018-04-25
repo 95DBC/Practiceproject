@@ -70,6 +70,17 @@ public interface DBoperationable {
 
 
     /**
+     * 这一部分为讨论回复功能表操作
+     */
+
+    void queryAllTalkText(Context context);
+
+
+    void insertTalkContext(Context context,Long uid,Long questionid ,String talkContext);
+
+
+
+    /**
      * 下面的内容为 GreenDAO 的各类条件查询
      */
 

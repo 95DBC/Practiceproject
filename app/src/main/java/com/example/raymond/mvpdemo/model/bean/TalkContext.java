@@ -13,10 +13,15 @@ import org.greenrobot.greendao.annotation.Generated;
 public class TalkContext {
     @Id(autoincrement = true)
     private Long id;
+
+    private Long uid;
+    private Long questionid;
     private String talkContext;
-    @Generated(hash = 1040574278)
-    public TalkContext(Long id, String talkContext) {
+    @Generated(hash = 183494293)
+    public TalkContext(Long id, Long uid, Long questionid, String talkContext) {
         this.id = id;
+        this.uid = uid;
+        this.questionid = questionid;
         this.talkContext = talkContext;
     }
     @Generated(hash = 837326724)
@@ -28,12 +33,28 @@ public class TalkContext {
     public void setId(Long id) {
         this.id = id;
     }
+    public Long getUid() {
+        return this.uid;
+    }
+    public void setUid(Long uid) {
+        this.uid = uid;
+    }
+    public Long getQuestionid() {
+        return this.questionid;
+    }
+    public void setQuestionid(Long questionid) {
+        this.questionid = questionid;
+    }
     public String getTalkContext() {
         return this.talkContext;
     }
     public void setTalkContext(String talkContext) {
         this.talkContext = talkContext;
     }
+
+   
+    
+
 
 
 }
