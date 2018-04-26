@@ -110,7 +110,8 @@ public class MainActivity extends AppCompatActivity implements ShowRegisterInfo 
 
 
     @OnClick({R.id.btn_commit, R.id.btn_querry, R.id.btn_delete, R.id.btn_update
-            , R.id.btn_query_witch_key, R.id.btn_network, R.id.testTinyPng,R.id.btn_testGreenDAOID,R.id.btn_picture})
+            , R.id.btn_query_witch_key, R.id.btn_network, R.id.testTinyPng,R.id.btn_testGreenDAOID
+            ,R.id.btn_picture,R.id.btn_talk})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_commit:

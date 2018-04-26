@@ -24,6 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginStart="4dp"
+            android:background="@null"
             android:hint="提交你的回复:" />
 
         <ImageView
@@ -47,7 +48,7 @@
         android:id="@+id/ly_talkContext"
         android:layout_width="match_parent"
         android:layout_height="320dp"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/rly_commitAnswer"
         android:orientation="vertical">
 
         <RelativeLayout

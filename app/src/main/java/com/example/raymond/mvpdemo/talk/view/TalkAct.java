@@ -1,15 +1,20 @@
 package com.example.raymond.mvpdemo.talk.view;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.raymond.mvpdemo.R;
 import com.example.raymond.mvpdemo.adapter.TalkContextAdapter;
@@ -18,6 +23,7 @@ import com.example.raymond.mvpdemo.model.bean.TalkContext;
 import com.example.raymond.mvpdemo.talk.presenter.InsertTalkContext;
 import com.example.raymond.mvpdemo.talk.presenter.QueryTalkContext;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -59,8 +65,8 @@ public class TalkAct extends AppCompatActivity implements ShowTalkDataOnView {
 
     private Context mContext = this;
 
-    private List<TalkContext> mTalkContextList = MyApplication.appSingleInstance().mTalkContextList;
-    TalkContextAdapter adapter = new TalkContextAdapter(mTalkContextList);
+    List<TalkContext> mTalkContextList = new ArrayList<TalkContext>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,21 +75,34 @@ public class TalkAct extends AppCompatActivity implements ShowTalkDataOnView {
         ButterKnife.bind(this);
 
         mQueryTalkContext = new QueryTalkContext(this);
-
+        mQueryTalkContext.queryTalkDataFromDB(mContext);
     }
 
     @Override
     public void showTalkContextOnView() {
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         rlvTalkContextt.setLayoutManager(layoutManager);
+        mTalkContextList = MyApplication.appSingleInstance().mTalkContextList;
+        TalkContextAdapter adapter = new TalkContextAdapter(mTalkContextList);
+//        for ( TalkContext talkContext: mTalkContextList){
+//            String mTalkContext = talkContext.getTalkContext();
+//            int start = mTalkContext.indexOf("回复");
+//            int end = start+1;
+//            SpannableString spanableString = new SpannableString(mTalkContext);
+//            ForegroundColorSpan colorSpan = new ForegroundColorSpan(Color.parseColor("#009ad6"));
+//            spanableString.setSpan(colorSpan,start,end, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+//        }
 
         rlvTalkContextt.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
 
         adapter.setOnItemClickListener(new TalkContextAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 rlyCommitAnswer.setVisibility(View.VISIBLE);
                 MyApplication.appSingleInstance().TalkState = 1;
+                Toast.makeText(mContext, "你好", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -99,19 +118,20 @@ public class TalkAct extends AppCompatActivity implements ShowTalkDataOnView {
                 mInsertTalkContext = new InsertTalkContext(this);
 
 //
-                if (0 == MyApplication.appSingleInstance().TalkState ){
-                    finalTalk = answer + "回复："+talkContext;
+                if (0 == MyApplication.appSingleInstance().TalkState) {
+                    finalTalk = answer + "回复：" + talkContext;
 
 
-                }else if (1== MyApplication.appSingleInstance().TalkState){
-                    finalTalk = answer + "回复："+ asker+talkContext;
+                } else if (1 == MyApplication.appSingleInstance().TalkState) {
+                    finalTalk = answer + "回复" + asker + "：" + talkContext;
 
                 }
 
-                mInsertTalkContext.insertDataToDB(mContext,askerId,responderId,finalTalk);
+                mInsertTalkContext.insertDataToDB(mContext, askerId, responderId, finalTalk);
                 MyApplication.appSingleInstance().TalkState = 0;
                 edtAnswerContext.setText("");
-                adapter.notifyDataSetChanged();
+//                rlyCommitAnswer.setVisibility(View.INVISIBLE);
+
                 break;
             case R.id.iv_packUp:
                 lyTalkContext.setVisibility(View.INVISIBLE);
@@ -119,7 +139,6 @@ public class TalkAct extends AppCompatActivity implements ShowTalkDataOnView {
                 break;
         }
     }
-
 
 
 }

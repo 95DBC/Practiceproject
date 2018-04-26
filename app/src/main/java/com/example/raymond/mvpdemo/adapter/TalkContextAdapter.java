@@ -1,6 +1,10 @@
 package com.example.raymond.mvpdemo.adapter;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +33,7 @@ public class TalkContextAdapter extends RecyclerView.Adapter<TalkContextAdapter.
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_talk, parent, false);
         ViewHolder holder = new ViewHolder(view);
+        view.setOnClickListener(this);
         return holder;
     }
 
@@ -51,13 +56,13 @@ public class TalkContextAdapter extends RecyclerView.Adapter<TalkContextAdapter.
 
     @Override
     public void onClick(View v) {
-        if (mOnItemClickListener !=null){
+        if (mOnItemClickListener != null) {
 
-            mOnItemClickListener.onItemClick(v,(int)v.getTag());
+            mOnItemClickListener.onItemClick(v, (int) v.getTag());
         }
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener){
+    public void setOnItemClickListener(OnItemClickListener listener) {
         this.mOnItemClickListener = listener;
     }
 
@@ -66,8 +71,9 @@ public class TalkContextAdapter extends RecyclerView.Adapter<TalkContextAdapter.
 
         public ViewHolder(View itemView) {
             super(itemView);
-
             talkContext = itemView.findViewById(R.id.tv_talkContext);
+
+
         }
     }
 }
