@@ -119,11 +119,11 @@ public class TalkAct extends AppCompatActivity implements ShowTalkDataOnView {
 
 //
                 if (0 == MyApplication.appSingleInstance().TalkState) {
-                    finalTalk = answer + "回复：" + talkContext;
+                    finalTalk = answer + " 回复：" + talkContext;
 
 
                 } else if (1 == MyApplication.appSingleInstance().TalkState) {
-                    finalTalk = answer + "回复" + asker + "：" + talkContext;
+                    finalTalk = answer + " 回复" + asker + "：" + talkContext;
 
                 }
 
